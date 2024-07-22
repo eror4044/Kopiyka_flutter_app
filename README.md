@@ -1,4 +1,4 @@
-# Kopiyka
+![A very simple and intuitive expense tracking app](https://github.com/user-attachments/assets/f0144233-6db5-4484-b450-836d0181a0fc)# Kopiyka
 
 Kopiyka is a friendly and intuitive expense tracking app designed for Ukrainian users. It integrates with Ukrainian banks (PrivatBank and Monobank) to automatically track and manage your expenses.
 
@@ -10,11 +10,7 @@ Kopiyka is a friendly and intuitive expense tracking app designed for Ukrainian 
 - **Backup and Restore**: Restore your data from .bac files.
 
 ## Screenshots
-
-![Dashboard](screenshots/dashboard.png)
-![Add Transaction](screenshots/add_transaction.png)
-![Reports](screenshots/reports.png)
-![Settings](screenshots/settings.png)
+![A very simple and intuitive expense tracking app](https://github.com/user-attachments/assets/7974df84-d281-4c71-824e-4ba64e1d4313)
 
 ## Installation
 
