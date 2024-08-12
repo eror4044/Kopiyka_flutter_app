@@ -1,4 +1,4 @@
-# kopiyka
+![A very simple and intuitive expense tracking app](https://github.com/user-attachments/assets/f0144233-6db5-4484-b450-836d0181a0fc)# Kopiyka
 
 A new Flutter project.
 
@@ -6,10 +6,8 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Screenshots
+![A very simple and intuitive expense tracking app](https://github.com/user-attachments/assets/7974df84-d281-4c71-824e-4ba64e1d4313)
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
