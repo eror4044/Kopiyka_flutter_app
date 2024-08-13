@@ -1,5 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:kopiyka/data/databases/heplers/database_helper.dart';
+import 'package:kopiyka/models/category.dart';
+import 'package:kopiyka/models/transaction_groped_data.dart';
 import 'package:kopiyka/shared/app_colors.dart';
 import 'add_transaction_screen.dart';
 import 'reports_screen.dart';
@@ -9,38 +12,38 @@ import '../services/privatbank_service.dart';
 import '../services/monobank_service.dart';
 import '../models/transaction.dart';
 
-// ignore: use_key_in_widget_constructors
 class DashboardScreen extends StatefulWidget {
   @override
-  // ignore: library_private_types_in_public_api
   _DashboardScreenState createState() => _DashboardScreenState();
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  final dbHelper = DatabaseHelper();
+
   final PrivateBankService privatBankService =
       PrivateBankService('YOUR_PRIVATBANK_API_KEY');
   final MonobankService monobankService =
       MonobankService('YOUR_MONOBANK_API_KEY');
-  List<Transaction> transactions = [];
+  List<TransactionGroupedData> transactions = [];
   int touchedIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    _initializeDatabase();
     _fetchTransactions();
+  }
+
+  void _initializeDatabase() async {
+    await dbHelper.database; // init Database
   }
 
   Future<void> _fetchTransactions() async {
     try {
-      List<Transaction> privateTransactions =
-          await privatBankService.fetchTransactions();
-      List<Transaction> monoTransactions =
-          await monobankService.fetchTransactions();
-      setState(() {
-        transactions = [...privateTransactions, ...monoTransactions];
-      });
+      transactions = await dbHelper.getTransactionsWithCategories();
+      setState(() {});
     } catch (e) {
-      // Handle errors
+      debugPrint('debug: $e');
     }
   }
 
@@ -54,12 +57,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           children: [
             SizedBox(
-              height: 400,
+              height: 500,
               child: PieChart(
                 PieChartData(
-                  sections: showingSections(),
-                  centerSpaceRadius: 80,
-                  sectionsSpace: 2,
+                  sections: showingSections(transactions),
+                  centerSpaceRadius: 60,
+                  sectionsSpace: 0,
                 ),
               ),
             )
@@ -116,97 +119,44 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
+}
 
-  List<PieChartSectionData> showingSections() {
-    return List.generate(4, (i) {
-      final isTouched = i == touchedIndex;
-      final fontSize = isTouched ? 20.0 : 16.0;
-      final radius = isTouched ? 110.0 : 100.0;
-      final widgetSize = isTouched ? 55.0 : 40.0;
-      const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
+List<PieChartSectionData> showingSections(
+    List<TransactionGroupedData> groupedData) {
+  return groupedData.map((data) {
+    final totalAmount = data.transactions.fold<double>(
+      0,
+      (sum, transaction) => sum + transaction.amount,
+    );
 
-      switch (i) {
-        case 0:
-          return PieChartSectionData(
-            color: AppColors.contentColorBlue,
-            value: 40,
-            title: '40%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xffffffff),
-              shadows: shadows,
-            ),
-            badgeWidget: _Badge(
-              'assets/icons/ophthalmology-svgrepo-com.svg',
-              size: widgetSize,
-              borderColor: AppColors.contentColorBlack,
-            ),
-            badgePositionPercentageOffset: .98,
-          );
-        case 1:
-          return PieChartSectionData(
-            color: AppColors.contentColorYellow,
-            value: 30,
-            title: '30%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xffffffff),
-              shadows: shadows,
-            ),
-            badgeWidget: _Badge(
-              'assets/icons/librarian-svgrepo-com.svg',
-              size: widgetSize,
-              borderColor: AppColors.contentColorBlack,
-            ),
-            badgePositionPercentageOffset: .98,
-          );
-        case 2:
-          return PieChartSectionData(
-            color: AppColors.contentColorPurple,
-            value: 16,
-            title: '16%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xffffffff),
-              shadows: shadows,
-            ),
-            badgeWidget: _Badge(
-              'assets/icons/fitness-svgrepo-com.svg',
-              size: widgetSize,
-              borderColor: AppColors.contentColorBlack,
-            ),
-            badgePositionPercentageOffset: .98,
-          );
-        case 3:
-          return PieChartSectionData(
-            color: AppColors.contentColorGreen,
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xffffffff),
-              shadows: shadows,
-            ),
-            badgeWidget: _Badge(
-              'assets/icons/worker-svgrepo-com.svg',
-              size: widgetSize,
-              borderColor: AppColors.contentColorBlack,
-            ),
-            badgePositionPercentageOffset: .98,
-          );
-        default:
-          throw Exception('Oh no');
-      }
-    });
-  }
+    final isTouched = groupedData.indexOf(data) == 0;
+    final fontSize = isTouched ? 20.0 : 16.0;
+    final radius = isTouched ? 110.0 : 100.0;
+    final widgetSize = isTouched ? 55.0 : 40.0;
+    const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
+
+    final category = data.transactions.first.category;
+
+    return PieChartSectionData(
+      color: Color(category.color),
+      value: totalAmount,
+      title:
+          '${(totalAmount / groupedData.expand((data) => data.transactions).fold(0, (sum, transaction) => sum + transaction.amount) * 100).toStringAsFixed(1)}%',
+      radius: radius,
+      titleStyle: TextStyle(
+        fontSize: fontSize,
+        fontWeight: FontWeight.bold,
+        color: const Color(0xffffffff),
+        shadows: shadows,
+      ),
+      badgeWidget: _Badge(
+        category.icon,
+        size: widgetSize,
+        borderColor: AppColors.contentColorBlack,
+      ),
+      badgePositionPercentageOffset: .98,
+    );
+  }).toList();
 }
 
 class _Badge extends StatelessWidget {
@@ -218,6 +168,32 @@ class _Badge extends StatelessWidget {
   final String svgAsset;
   final double size;
   final Color borderColor;
+
+  IconData getIconData(String iconName) {
+    switch (iconName) {
+      case 'fastfood':
+        return Icons.fastfood;
+      case 'directions_car':
+        return Icons.directions_car;
+      case 'local_movies':
+        return Icons.local_movies;
+      case 'build':
+        return Icons.build;
+      case 'healing':
+        return Icons.healing;
+      case 'school':
+        return Icons.school;
+      case 'shopping_cart':
+        return Icons.shopping_cart;
+      case 'home':
+        return Icons.home;
+      case 'savings':
+        return Icons
+            .savings; // Custom Icons.savings, if you use flutter 3.7 or higher
+      default:
+        return Icons.help; // Fallback icon
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -241,6 +217,11 @@ class _Badge extends StatelessWidget {
         ],
       ),
       padding: EdgeInsets.all(size * .15),
+      child: Icon(
+        getIconData(svgAsset),
+        size: size * 0.6,
+        color: borderColor,
+      ),
     );
   }
 }
