@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/dashboard_screen.dart';
+import 'screens/dashboard/dashboard_screen.dart';
 
 void main() {
   runApp(KopiykaApp());
@@ -12,6 +12,7 @@ class KopiykaApp extends StatelessWidget {
       title: 'Kopiyka',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.grey[200],
       ),
       home: DashboardScreen(),
     );
