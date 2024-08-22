@@ -7,6 +7,8 @@ import 'package:kopiyka/screens/dashboard/components/custom_drawer.dart';
 import 'package:kopiyka/screens/dashboard/components/dashboard_pie_chart.dart';
 
 class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
+
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
