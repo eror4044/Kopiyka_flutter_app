@@ -7,8 +7,7 @@ import 'package:kopiyka/shared/app_colors.dart';
 class DashboardPieChart extends StatelessWidget {
   final List<TransactionGroupedData> transactions;
 
-  const DashboardPieChart({Key? key, required this.transactions})
-      : super(key: key);
+  const DashboardPieChart({super.key, required this.transactions});
 
   @override
   Widget build(BuildContext context) {

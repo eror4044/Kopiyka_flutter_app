@@ -4,7 +4,7 @@ import 'package:kopiyka/models/transaction_groped_data.dart';
 import 'package:kopiyka/screens/dashboard/components/balance.dart';
 import 'package:kopiyka/screens/dashboard/components/bottom_bar.dart';
 import 'package:kopiyka/screens/dashboard/components/custom_drawer.dart';
-import 'package:kopiyka/screens/dashboard/components/pie_chart.dart';
+import 'package:kopiyka/screens/dashboard/components/dashboard_pie_chart.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -45,7 +45,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
       bottomNavigationBar: DashboardBottomBar(),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
     );
   }
 }

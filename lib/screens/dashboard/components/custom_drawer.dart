@@ -4,16 +4,18 @@ import 'package:kopiyka/screens/restore_data_screen.dart';
 import 'package:kopiyka/screens/settings_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         children: [
           const DrawerHeader(
-            child: Text('Menu'),
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
+            child: Text('Menu'),
           ),
           ListTile(
             title: const Text('Reports'),
