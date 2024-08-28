@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kopiyka/data/databases/heplers/database_helper.dart';
 import 'package:kopiyka/models/transaction_groped_data.dart';
+import 'package:kopiyka/providers/category_provider.dart';
 import 'package:kopiyka/providers/transaction_provider.dart';
 import 'package:kopiyka/screens/dashboard/components/balance.dart';
 import 'package:kopiyka/screens/dashboard/components/bottom_bar.dart';
@@ -16,12 +17,11 @@ class DashboardScreen extends ConsumerStatefulWidget {
 }
 
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
-  List<TransactionGroupedData> transactions = [];
-
   @override
   void initState() {
     super.initState();
     ref.read(transactionProvider.notifier).fetchTransactions();
+    ref.read(categoryProvider.notifier).fetchCategories();
   }
 
   @override

@@ -8,6 +8,7 @@ class TransactionModel {
   final String currency;
   final String description;
   final DateTime date;
+  final bool isIncome;
 
   TransactionModel({
     this.id,
@@ -17,6 +18,7 @@ class TransactionModel {
     required this.currency,
     required this.description,
     required this.date,
+    required this.isIncome,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,6 +29,7 @@ class TransactionModel {
       'account': account,
       'currency': currency,
       'description': description,
+      'isIncome': isIncome ? 1 : 0,
       'date': date.toIso8601String(),
     };
   }
@@ -41,6 +44,8 @@ class TransactionModel {
       currency: map['currency'],
       description: map['description'],
       date: DateTime.parse(map['date']),
+      // Safely parse 'isIncome' from the map. Default to false if null.
+      isIncome: (map['isIncome'] ?? 0) == 1,
     );
   }
 }

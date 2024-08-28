@@ -35,7 +35,8 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         icon TEXT,
         title TEXT,
-        color INTEGER
+        color INTEGER,
+        type TEXT
       )
     ''');
 
@@ -48,6 +49,7 @@ class DatabaseHelper {
         account TEXT,
         currency TEXT,
         description TEXT,
+        isIncome INTEGER,
         FOREIGN KEY (category) REFERENCES categories(id) ON DELETE CASCADE
       )
     ''');
@@ -60,49 +62,64 @@ class DatabaseHelper {
   Future<void> _insertInitialCategories(Database db) async {
     List<Map<String, dynamic>> initialCategories = [
       {
-        'icon': 'fastfood', // Имя иконки из пакета Flutter
+        'icon': 'fastfood',
         'title': 'Food',
-        'color': 0xFF4CAF50, // Зеленый
+        'color': 0xFF4CAF50,
+        'type': 'expense',
       },
       {
         'icon': 'directions_car',
         'title': 'Transport',
-        'color': 0xFF2196F3, // Синий
+        'color': 0xFF2196F3,
+        'type': 'expense',
       },
       {
         'icon': 'local_movies',
         'title': 'Entertainment',
-        'color': 0xFFF44336, // Красный
+        'color': 0xFFF44336,
+        'type': 'expense',
       },
       {
         'icon': 'build',
         'title': 'Utilities',
-        'color': 0xFFFFEB3B, // Желтый
+        'color': 0xFFFFEB3B,
+        'type': 'expense',
       },
       {
         'icon': 'healing',
         'title': 'Health',
-        'color': 0xFFE91E63, // Розовый
+        'color': 0xFFE91E63,
+        'type': 'expense',
       },
       {
         'icon': 'school',
         'title': 'Education',
-        'color': 0xFF9C27B0, // Фиолетовый
+        'color': 0xFF9C27B0,
+        'type': 'expense',
       },
       {
         'icon': 'shopping_cart',
         'title': 'Shopping',
-        'color': 0xFFFF9800, // Оранжевый
+        'color': 0xFFFF9800,
+        'type': 'expense',
       },
       {
         'icon': 'home',
         'title': 'Rent',
-        'color': 0xFF3F51B5, // Индиго
+        'color': 0xFF3F51B5,
+        'type': 'expense',
       },
       {
         'icon': 'savings',
         'title': 'Savings',
-        'color': 0xFF009688, // Бирюзовый
+        'color': 0xFF009688,
+        'type': 'expense',
+      },
+      {
+        'icon': 'attach_money',
+        'title': 'Salary',
+        'color': 0xFFDDDA41,
+        'type': 'income',
       },
     ];
 
@@ -125,6 +142,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Groceries',
         'date': '2023-07-25',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Transport'],
@@ -133,6 +151,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Taxi ride',
         'date': '2023-07-26',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Entertainment'],
@@ -141,6 +160,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Concert tickets',
         'date': '2023-07-27',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Utilities'],
@@ -149,6 +169,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Electricity bill',
         'date': '2023-07-28',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Food'],
@@ -157,6 +178,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Dinner at a restaurant',
         'date': '2023-07-29',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Health'],
@@ -165,6 +187,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Medical check-up',
         'date': '2023-07-30',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Education'],
@@ -173,6 +196,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Online course fee',
         'date': '2023-08-01',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Shopping'],
@@ -181,6 +205,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Clothing and accessories',
         'date': '2023-08-02',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Rent'],
@@ -189,6 +214,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Monthly rent payment',
         'date': '2023-08-03',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Savings'],
@@ -197,6 +223,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Monthly savings deposit',
         'date': '2023-08-04',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Entertainment'],
@@ -205,6 +232,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Movie night',
         'date': '2023-08-05',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Utilities'],
@@ -213,6 +241,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Water bill',
         'date': '2023-08-06',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Transport'],
@@ -221,6 +250,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Gasoline',
         'date': '2023-08-07',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Food'],
@@ -229,6 +259,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Weekly groceries',
         'date': '2023-08-08',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Health'],
@@ -237,6 +268,7 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Pharmacy expenses',
         'date': '2023-08-09',
+        'isIncome': 0,
       },
       {
         'category': categoryIds['Shopping'],
@@ -245,7 +277,26 @@ class DatabaseHelper {
         'currency': 'USD',
         'description': 'Gadgets and electronics',
         'date': '2023-08-10',
+        'isIncome': 0,
       },
+      {
+        'category': categoryIds['Shopping'],
+        'amount': 150.0,
+        'account': 'Debit Card',
+        'currency': 'USD',
+        'description': 'Gadgets and electronics',
+        'date': '2023-08-10',
+        'isIncome': 0,
+      },
+      {
+        'category': categoryIds['Salary'],
+        'amount': 15000.0,
+        'account': 'Debit Card',
+        'currency': 'USD',
+        'description': 'salary',
+        'date': '2023-08-10',
+        'isIncome': 1,
+      }
     ];
 
     for (var transaction in initialTransactions) {
@@ -263,18 +314,18 @@ class DatabaseHelper {
     final db = await database;
     return await db.rawQuery('''
     SELECT transactions.*, categories.id as cat_id, categories.icon as cat_icon,
-           categories.title as cat_title, categories.color as cat_color
+           categories.title as cat_title, categories.color as cat_color, categories.type as cat_type
     FROM transactions
     INNER JOIN categories ON transactions.category = categories.id
   ''');
   }
 
+  //ToDo maybe move this to another helper
   Future<List<TransactionGroupedData>> getTransactionsWithCategories() async {
     final List<Map<String, dynamic>> transactions = await getTransactions();
     final List<Map<String, dynamic>> categories = await getAllCategories();
 
     final List<TransactionGroupedData> groupedData = [];
-    //ToDo 1: Implement the logic to group transactions by categories (now it is incorrect)
     //add categories to groupedData
     for (var category in categories) {
       final categoryModel = CategoryModel.fromMap(category);
@@ -290,6 +341,7 @@ class DatabaseHelper {
         icon: transaction['cat_icon'],
         title: transaction['cat_title'],
         color: transaction['cat_color'],
+        type: CategoryType.fromValue(transaction['cat_type']),
       );
       final transactionModel = TransactionModel.fromMap(transaction, category);
       for (var group in groupedData) {

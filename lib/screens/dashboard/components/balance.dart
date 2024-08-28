@@ -11,11 +11,16 @@ class DashboardBalance extends StatelessWidget {
   Widget build(BuildContext context) {
     final balance = transactions
         .expand((data) => data.transactions)
-        .fold<double>(0, (sum, transaction) => sum + transaction.amount);
+        .fold<double>(
+            0,
+            (sum, transaction) => transaction.isIncome
+                ? sum + transaction.amount
+                : sum - transaction.amount);
 
     return Text(
       "Balance: $balance UAH",
-      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     );
   }
 }
+//ToDo Rebuild logic for balance calculation adding income and expenses (now it's only expenses)

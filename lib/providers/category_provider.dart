@@ -28,4 +28,8 @@ class CategoryNotifier extends StateNotifier<List<CategoryModel>> {
 
     state = [...state, category];
   }
+
+  void clearState() {
+    state = [];
+  }
 }

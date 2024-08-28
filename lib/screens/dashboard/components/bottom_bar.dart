@@ -15,14 +15,14 @@ class BottomBar extends StatelessWidget {
             iconSize: 120,
             icon: const Icon(Icons.add_circle_outline, color: Colors.green),
             onPressed: () {
-              showAddTransactionModal(context);
+              showAddTransactionModal(context, true);
             },
           ),
           IconButton(
             iconSize: 120,
             icon: const Icon(Icons.remove_circle_outline, color: Colors.red),
             onPressed: () {
-              showAddTransactionModal(context);
+              showAddTransactionModal(context, false);
             },
           ),
         ],

@@ -46,7 +46,22 @@ class _DashboardPieChartState extends State<DashboardPieChart> {
 
   List<PieChartSectionData> showingSections(
       List<TransactionGroupedData> groupedData) {
-    return groupedData.asMap().entries.map((entry) {
+    // Filter groupedData to only include transactions where isIncome is false
+    final filteredGroupedData = groupedData
+        .map((group) {
+          final filteredTransactions = group.transactions
+              .where((transaction) => !transaction.isIncome)
+              .toList();
+          return TransactionGroupedData(
+            categoryName: group.categoryName,
+            transactions: filteredTransactions,
+          );
+        })
+        .where((group) => group.transactions.isNotEmpty)
+        .toList();
+
+    // Generate PieChartSectionData only for the filtered transactions
+    return filteredGroupedData.asMap().entries.map((entry) {
       int index = entry.key;
       TransactionGroupedData data = entry.value;
 
@@ -67,7 +82,7 @@ class _DashboardPieChartState extends State<DashboardPieChart> {
         color: Color(category.color),
         value: totalAmount,
         title:
-            '${(totalAmount / groupedData.expand((data) => data.transactions).fold(0, (sum, transaction) => sum + transaction.amount) * 100).toStringAsFixed(1)}%',
+            '${(totalAmount / filteredGroupedData.expand((data) => data.transactions).fold(0, (sum, transaction) => sum + transaction.amount) * 100).toStringAsFixed(1)}%',
         radius: radius,
         titleStyle: TextStyle(
           fontSize: fontSize,

@@ -7,20 +7,21 @@ import 'package:kopiyka/providers/transaction_provider.dart';
 import 'package:kopiyka/screens/dashboard/components/custom_badge.dart';
 
 class AddTransactionModal extends ConsumerStatefulWidget {
-  const AddTransactionModal({super.key});
+  final bool isIncome;
+  const AddTransactionModal(this.isIncome, {super.key});
 
   @override
   _AddTransactionModalState createState() => _AddTransactionModalState();
 }
 
 class _AddTransactionModalState extends ConsumerState<AddTransactionModal> {
+  String? _description;
   double? _amount;
   CategoryModel? _selectedCategory;
 
   @override
   void initState() {
     super.initState();
-    ref.read(categoryProvider.notifier).fetchCategories();
   }
 
   @override
@@ -34,6 +35,17 @@ class _AddTransactionModalState extends ConsumerState<AddTransactionModal> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: 'Description',
+                ),
+                keyboardType: TextInputType.text,
+                onChanged: (value) {
+                  setState(() {
+                    _description = value;
+                  });
+                },
+              ),
               TextField(
                 decoration: const InputDecoration(
                   labelText: 'Amount',
@@ -55,9 +67,18 @@ class _AddTransactionModalState extends ConsumerState<AddTransactionModal> {
                   crossAxisCount: 4,
                   childAspectRatio: 1,
                 ),
-                itemCount: categories.length,
+                //showing only categories for income or expense
+                itemCount: categories
+                    .where((category) => widget.isIncome
+                        ? category.type == CategoryType.income
+                        : category.type == CategoryType.expense)
+                    .length,
                 itemBuilder: (context, index) {
-                  final category = categories[index];
+                  final category = categories
+                      .where((category) => widget.isIncome
+                          ? category.type == CategoryType.income
+                          : category.type == CategoryType.expense)
+                      .toList()[index];
 
                   return GestureDetector(
                     onTap: () {
@@ -92,7 +113,8 @@ class _AddTransactionModalState extends ConsumerState<AddTransactionModal> {
                       date: DateTime.now(),
                       account: '',
                       currency: '',
-                      description: '',
+                      description: _description ?? '',
+                      isIncome: false,
                     );
                     ref
                         .read(transactionProvider.notifier)
@@ -117,7 +139,7 @@ class _AddTransactionModalState extends ConsumerState<AddTransactionModal> {
   }
 }
 
-void showAddTransactionModal(BuildContext context) {
+void showAddTransactionModal(BuildContext context, bool isIncome) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -125,7 +147,7 @@ void showAddTransactionModal(BuildContext context) {
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
     builder: (context) {
-      return const AddTransactionModal();
+      return AddTransactionModal(isIncome);
     },
   );
 }
