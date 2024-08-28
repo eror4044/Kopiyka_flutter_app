@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kopiyka/screens/add_transaction_screen.dart';
+import 'package:kopiyka/screens/add_transaction_modal.dart';
 
-class DashboardBottomBar extends StatelessWidget {
+class BottomBar extends StatelessWidget {
+  const BottomBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -13,20 +15,14 @@ class DashboardBottomBar extends StatelessWidget {
             iconSize: 120,
             icon: const Icon(Icons.add_circle_outline, color: Colors.green),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddTransactionScreen()),
-              );
+              showAddTransactionModal(context);
             },
           ),
           IconButton(
             iconSize: 120,
             icon: const Icon(Icons.remove_circle_outline, color: Colors.red),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddTransactionScreen()),
-              );
+              showAddTransactionModal(context);
             },
           ),
         ],
