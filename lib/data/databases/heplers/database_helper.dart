@@ -255,26 +255,30 @@ class DatabaseHelper {
 
   Future<int> insertTransaction(TransactionModel transaction) async {
     final db = await database;
-    return await db.insert('transactions', transaction.toMap());
+    final _transaction = transaction.toMap();
+    return await db.insert('transactions', _transaction);
   }
 
-  Future<List<TransactionGroupedData>> getTransactionsWithCategories() async {
+  Future<List<Map<String, dynamic>>> getTransactions() async {
     final db = await database;
-
-    final List<Map<String, dynamic>> transactions = await db.rawQuery('''
+    return await db.rawQuery('''
     SELECT transactions.*, categories.id as cat_id, categories.icon as cat_icon,
            categories.title as cat_title, categories.color as cat_color
     FROM transactions
     INNER JOIN categories ON transactions.category = categories.id
   ''');
+  }
+
+  Future<List<TransactionGroupedData>> getTransactionsWithCategories() async {
+    final List<Map<String, dynamic>> transactions = await getTransactions();
     final List<Map<String, dynamic>> categories = await getAllCategories();
 
     final Map<CategoryModel, List<TransactionModel>> groupedData = {};
     //ToDo 1: Implement the logic to group transactions by categories (now it is incorrect)
-    for (var map_c in categories) {
-      final category = CategoryModel.fromMap(map_c);
-      for (var map_t in transactions) {
-        final transaction = TransactionModel.fromMap(map_t, category);
+    for (var mapC in categories) {
+      final category = CategoryModel.fromMap(mapC);
+      for (var mapT in transactions) {
+        final transaction = TransactionModel.fromMap(mapT, category);
         if (transaction.category.title == category.title) {
           groupedData.update(
             category,
