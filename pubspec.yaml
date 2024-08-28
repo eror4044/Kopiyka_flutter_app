@@ -38,6 +38,7 @@ dependencies:
   fl_chart: ^0.68.0
   sqflite: ^2.3.2
   flutter_bloc: ^8.1.6
+  flutter_riverpod: ^2.5.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
