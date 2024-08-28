@@ -273,28 +273,33 @@ class DatabaseHelper {
     final List<Map<String, dynamic>> transactions = await getTransactions();
     final List<Map<String, dynamic>> categories = await getAllCategories();
 
-    final Map<CategoryModel, List<TransactionModel>> groupedData = {};
+    final List<TransactionGroupedData> groupedData = [];
     //ToDo 1: Implement the logic to group transactions by categories (now it is incorrect)
-    for (var mapC in categories) {
-      final category = CategoryModel.fromMap(mapC);
-      for (var mapT in transactions) {
-        final transaction = TransactionModel.fromMap(mapT, category);
-        if (transaction.category.title == category.title) {
-          groupedData.update(
-            category,
-            (list) => list..add(transaction),
-            ifAbsent: () => [transaction],
-          );
+    //add categories to groupedData
+    for (var category in categories) {
+      final categoryModel = CategoryModel.fromMap(category);
+      groupedData.add(TransactionGroupedData(
+        categoryName: categoryModel.title,
+        transactions: [],
+      ));
+    }
+    //add transactions to groupedData by category
+    for (var transaction in transactions) {
+      final category = CategoryModel(
+        id: transaction['cat_id'],
+        icon: transaction['cat_icon'],
+        title: transaction['cat_title'],
+        color: transaction['cat_color'],
+      );
+      final transactionModel = TransactionModel.fromMap(transaction, category);
+      for (var group in groupedData) {
+        if (group.categoryName == transactionModel.category.title) {
+          group.transactions.add(transactionModel);
         }
       }
     }
 
-    return groupedData.entries.map((entry) {
-      return TransactionGroupedData(
-        categoryName: entry.key.title,
-        transactions: entry.value,
-      );
-    }).toList();
+    return groupedData;
   }
 
   Future<List<Map<String, dynamic>>> getAllCategories() async {
