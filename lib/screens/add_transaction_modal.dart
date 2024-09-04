@@ -114,7 +114,7 @@ class _AddTransactionModalState extends ConsumerState<AddTransactionModal> {
                       account: '',
                       currency: '',
                       description: _description ?? '',
-                      isIncome: false,
+                      isIncome: widget.isIncome,
                     );
                     ref
                         .read(transactionProvider.notifier)

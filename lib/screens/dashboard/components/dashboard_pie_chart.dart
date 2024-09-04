@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:kopiyka/models/transaction_groped_data.dart';
+import 'package:kopiyka/screens/dashboard/components/bottom_sheet_for_section.dart';
 import 'package:kopiyka/screens/dashboard/components/custom_badge.dart';
 import 'package:kopiyka/shared/app_colors.dart';
 
@@ -107,41 +108,15 @@ class _DashboardPieChartState extends State<DashboardPieChart> {
 
     showModalBottomSheet(
       context: context,
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(16.0),
-          color: const Color.fromARGB(26, 73, 63, 63),
-          child: ListView(
-            padding: const EdgeInsets.all(16.0),
-            children: [
-              Text(
-                'Категория: ${selectedData.transactions.first.category.title}',
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                'Загальна сумма: \$${selectedData.transactions.fold<double>(0, (sum, transaction) => sum + transaction.amount).toStringAsFixed(2)}',
-              ),
-              const SizedBox(),
-              ...selectedData.transactions.map((transaction) {
-                return Card(
-                  elevation: 1,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  margin: const EdgeInsets.symmetric(vertical: 6),
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: ListTile(
-                      title: Text(transaction.description),
-                      subtitle: Text(
-                          'Сумма: \$${transaction.amount.toStringAsFixed(2)}'),
-                    ),
-                  ),
-                );
-              }).toList(),
-            ],
-          ),
+      builder: (innerContext) {
+        return BottomSheetForSection(
+          index: index,
+          selectedData: selectedData,
+          onClose: () {
+            setState(() {
+              touchedIndex = -1;
+            });
+          },
         );
       },
     ).whenComplete(() {

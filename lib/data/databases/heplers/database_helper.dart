@@ -320,7 +320,6 @@ class DatabaseHelper {
   ''');
   }
 
-  //ToDo maybe move this to another helper
   Future<List<TransactionGroupedData>> getTransactionsWithCategories() async {
     final List<Map<String, dynamic>> transactions = await getTransactions();
     final List<Map<String, dynamic>> categories = await getAllCategories();
