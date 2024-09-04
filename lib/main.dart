@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'screens/dashboard/dashboard_screen.dart';
 
 void main() {
-  runApp(KopiykaApp());
+  runApp(ProviderScope(child: KopiykaApp()));
 }
 
 class KopiykaApp extends StatelessWidget {

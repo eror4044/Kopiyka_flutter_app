@@ -1,37 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:kopiyka/data/databases/heplers/database_helper.dart';
-import 'package:kopiyka/models/transaction_groped_data.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kopiyka/providers/category_provider.dart';
+import 'package:kopiyka/providers/transaction_provider.dart';
 import 'package:kopiyka/screens/dashboard/components/balance.dart';
 import 'package:kopiyka/screens/dashboard/components/bottom_bar.dart';
 import 'package:kopiyka/screens/dashboard/components/custom_drawer.dart';
 import 'package:kopiyka/screens/dashboard/components/dashboard_pie_chart.dart';
 
-class DashboardScreen extends StatefulWidget {
+class DashboardScreen extends ConsumerStatefulWidget {
+  const DashboardScreen({super.key});
+
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
-  List<TransactionGroupedData> transactions = [];
-
+class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    _fetchTransactions();
-  }
-
-  //ToDo move this to bloc state management
-  Future<void> _fetchTransactions() async {
-    try {
-      transactions = await DatabaseHelper().getTransactionsWithCategories();
-      setState(() {});
-    } catch (e) {
-      debugPrint('Error fetching transactions: $e');
-    }
+    ref.read(transactionProvider.notifier).fetchTransactions();
+    ref.read(categoryProvider.notifier).fetchCategories();
   }
 
   @override
   Widget build(BuildContext context) {
+    final transactions = ref.watch(transactionProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),
@@ -44,8 +38,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: DashboardBottomBar(),
+      bottomNavigationBar: const BottomBar(),
       drawer: const CustomDrawer(),
     );
   }
 }
+//ToDo Fix issue with income transaction (it showing as expense) in chart and balance

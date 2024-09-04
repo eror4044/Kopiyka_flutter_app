@@ -7,15 +7,33 @@ class DashboardBalance extends StatelessWidget {
   const DashboardBalance({Key? key, required this.transactions})
       : super(key: key);
 
+  // Method to calculate balance
+  double calculateBalance(List<TransactionGroupedData> transactions) {
+    double income = 0;
+    double expenses = 0;
+
+    // Separate income and expenses for clearer logic
+    for (var data in transactions) {
+      for (var transaction in data.transactions) {
+        if (transaction.isIncome) {
+          income += transaction.amount;
+        } else {
+          expenses += transaction.amount;
+        }
+      }
+    }
+
+    // Return final balance (income - expenses)
+    return income - expenses;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final balance = transactions
-        .expand((data) => data.transactions)
-        .fold<double>(0, (sum, transaction) => sum + transaction.amount);
+    final balance = calculateBalance(transactions);
 
     return Text(
       "Balance: $balance UAH",
-      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     );
   }
 }
