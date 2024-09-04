@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart'; // Import for GoRouter
+import 'package:go_router/go_router.dart';
+import 'package:kopiyka/screens/dashboard/components/custom_drawer.dart'; // Import for GoRouter
 
 class NotFoundScreen extends StatelessWidget {
   const NotFoundScreen({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class NotFoundScreen extends StatelessWidget {
           ],
         ),
       ),
+      drawer: const CustomDrawer(),
     );
   }
 }

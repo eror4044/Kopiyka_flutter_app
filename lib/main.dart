@@ -25,17 +25,18 @@ class KopiykaApp extends StatelessWidget {
       GoRoute(
         path: '/reports',
         name: 'reports',
-        builder: (context, state) => ReportsScreen(), // Example screen
+        builder: (context, state) => const ReportsScreen(), // Example screen
       ),
       GoRoute(
         path: '/restore-data',
         name: 'restore-data',
-        builder: (context, state) => RestoreDataScreen(), // Example screen
+        builder: (context, state) =>
+            const RestoreDataScreen(), // Example screen
       ),
       GoRoute(
         path: '/settings',
         name: 'settings',
-        builder: (context, state) => SettingsScreen(), // Example screen
+        builder: (context, state) => const SettingsScreen(), // Example screen
       )
     ],
     errorBuilder: (context, state) {

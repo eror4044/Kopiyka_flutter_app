@@ -33,7 +33,7 @@ class CustomDrawer extends StatelessWidget {
             title: const Text('Restore Data'),
             onTap: () {
               // Navigate to the RestoreDataScreen
-              context.go('/restore');
+              context.go('/restore-data');
             },
           ),
           ListTile(
