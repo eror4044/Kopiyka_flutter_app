@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kopiyka/constants/routing_enum.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -19,21 +20,21 @@ class CustomDrawer extends StatelessWidget {
             title: const Text('Reports'),
             onTap: () {
               // Navigate to the ReportsScreen
-              context.go('/reports');
+              context.go(RoutingEnum.reports.name);
             },
           ),
           ListTile(
             title: const Text('Settings'),
             onTap: () {
               // Navigate to the SettingsScreen
-              context.go('/settings');
+              context.go(RoutingEnum.settings.name);
             },
           ),
           ListTile(
             title: const Text('Restore Data'),
             onTap: () {
               // Navigate to the RestoreDataScreen
-              context.go('/restore-data');
+              context.go(RoutingEnum.restoreData.name);
             },
           ),
           ListTile(
