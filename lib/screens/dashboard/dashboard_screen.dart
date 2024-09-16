@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kopiyka/constants/routing_enum.dart';
 import 'package:kopiyka/providers/category_provider.dart';
 import 'package:kopiyka/providers/transaction_provider.dart';
 import 'package:kopiyka/screens/dashboard/components/balance.dart';
@@ -27,9 +29,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     final transactions = ref.watch(transactionProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dashboard'),
-      ),
+      appBar: AppBar(actions: [
+        IconButton(
+          icon: const Icon(Icons.settings_accessibility_outlined),
+          onPressed: () {
+            //open change theme screen
+            context.go(RoutingEnum.settings.name);
+          },
+        ),
+      ]),
       body: SingleChildScrollView(
         child: Column(
           children: [

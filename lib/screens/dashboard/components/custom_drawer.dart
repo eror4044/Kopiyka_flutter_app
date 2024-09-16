@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kopiyka/screens/reports_screen.dart';
-import 'package:kopiyka/screens/restore_data_screen.dart';
-import 'package:kopiyka/screens/settings_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kopiyka/constants/routing_enum.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -20,30 +19,31 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Reports'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ReportsScreen()),
-              );
+              // Navigate to the ReportsScreen
+              context.go(RoutingEnum.reports.name);
             },
           ),
           ListTile(
             title: const Text('Settings'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingsScreen()),
-              );
+              // Navigate to the SettingsScreen
+              context.go(RoutingEnum.settings.name);
             },
           ),
           ListTile(
             title: const Text('Restore Data'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => RestoreDataScreen()),
-              );
+              // Navigate to the RestoreDataScreen
+              context.go(RoutingEnum.restoreData.name);
             },
           ),
+          ListTile(
+            title: const Text('404 Test route'),
+            onTap: () {
+              // Navigate to the empty screen
+              context.go('/void');
+            },
+          )
         ],
       ),
     );
