@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kopiyka/constants/routing_enum.dart';
+import 'package:kopiyka/app_routes.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -17,24 +17,27 @@ class CustomDrawer extends StatelessWidget {
             child: Text('Menu'),
           ),
           ListTile(
+            title: const Text('Dashboard'),
+            onTap: () {
+              context.go(AppRoutes.dashboard);
+            },
+          ),
+          ListTile(
             title: const Text('Reports'),
             onTap: () {
-              // Navigate to the ReportsScreen
-              context.go(RoutingEnum.reports.name);
+              context.go(AppRoutes.reports);
             },
           ),
           ListTile(
             title: const Text('Settings'),
             onTap: () {
-              // Navigate to the SettingsScreen
-              context.go(RoutingEnum.settings.name);
+              context.go(AppRoutes.settings);
             },
           ),
           ListTile(
             title: const Text('Restore Data'),
             onTap: () {
-              // Navigate to the RestoreDataScreen
-              context.go(RoutingEnum.restoreData.name);
+              context.go(AppRoutes.restoreData);
             },
           ),
           ListTile(

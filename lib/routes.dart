@@ -1,6 +1,6 @@
 // Define routes using GoRouter
 import 'package:go_router/go_router.dart';
-import 'package:kopiyka/constants/routing_enum.dart';
+import 'package:kopiyka/app_routes.dart';
 import 'package:kopiyka/screens/dashboard/dashboard_screen.dart';
 import 'package:kopiyka/screens/not_found_screen.dart';
 import 'package:kopiyka/screens/reports_screen.dart';
@@ -10,24 +10,24 @@ import 'package:kopiyka/screens/settings_screen.dart';
 final GoRouter router = GoRouter(
   routes: [
     GoRoute(
-      path: '/',
+      path: AppRoutes.dashboard,
       name: 'dashboard',
       builder: (context, state) => const DashboardScreen(),
     ),
     GoRoute(
-      path: "/" + RoutingEnum.reports.name,
-      name: RoutingEnum.reports.name,
-      builder: (context, state) => const ReportsScreen(), // Example screen
+      path: AppRoutes.reports,
+      name: 'reports',
+      builder: (context, state) => const ReportsScreen(),
     ),
     GoRoute(
-      path: "/" + RoutingEnum.restoreData.name,
-      name: RoutingEnum.restoreData.name,
-      builder: (context, state) => const RestoreDataScreen(), // Example screen
+      path: AppRoutes.restoreData,
+      name: 'restore-data',
+      builder: (context, state) => const RestoreDataScreen(),
     ),
     GoRoute(
-      path: "/" + RoutingEnum.settings.name,
-      name: RoutingEnum.settings.name,
-      builder: (context, state) => const SettingsScreen(), // Example screen
+      path: AppRoutes.settings,
+      name: 'settings',
+      builder: (context, state) => const SettingsScreen(),
     )
   ],
   errorBuilder: (context, state) {
