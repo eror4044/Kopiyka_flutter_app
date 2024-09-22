@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kopiyka/providers/theme_provider.dart';
 import 'package:kopiyka/routes.dart';
+import 'package:kopiyka/theme/app_theme.dart';
 
 void main() {
-  runApp(ProviderScope(child: KopiykaApp()));
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
-class KopiykaApp extends StatelessWidget {
-  KopiykaApp({Key? key}) : super(key: key);
-
+class MyApp extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeProvider);
+
     return MaterialApp.router(
-        title: 'Kopiyka',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: Colors.grey[200],
-        ),
-        routerConfig: router);
+      title: 'Flutter Theme Example',
+      themeMode: themeMode,
+      darkTheme: AppTheme.darkTheme,
+      routerConfig: router,
+    );
   }
 }
