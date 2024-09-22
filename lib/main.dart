@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kopiyka/generated/app_localizations.dart';
 import 'package:kopiyka/providers/theme_provider.dart';
 import 'package:kopiyka/providers/language_provider.dart';
 import 'package:kopiyka/routes.dart';
@@ -30,6 +31,7 @@ class KopiykaApp extends ConsumerWidget {
       routerConfig: router,
       locale: locale,
       localizationsDelegates: const [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

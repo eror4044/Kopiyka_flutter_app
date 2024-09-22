@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kopiyka/generated/app_localizations.dart';
 import 'package:kopiyka/providers/language_provider.dart';
 import 'package:kopiyka/providers/theme_provider.dart';
+import 'package:kopiyka/screens/dashboard/components/custom_drawer.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -13,19 +15,19 @@ class SettingsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-          //title: const Text(AppLocalizations.of(context)!.lightTheme),
-          ),
+        title: Text(AppLocalizations.of(context)!.settings),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Theme Settings',
+            Text(
+              AppLocalizations.of(context)!.theme,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             RadioListTile<ThemeMode>(
-              //title: Text(AppLocalizations.of(context)!.lightTheme),
+              title: Text(AppLocalizations.of(context)!.lightTheme),
               value: ThemeMode.light,
               groupValue: themeMode,
               onChanged: (mode) {
@@ -33,7 +35,7 @@ class SettingsScreen extends ConsumerWidget {
               },
             ),
             RadioListTile<ThemeMode>(
-              title: const Text('Dark Theme'),
+              title: Text(AppLocalizations.of(context)!.darkTheme),
               value: ThemeMode.dark,
               groupValue: themeMode,
               onChanged: (mode) {
@@ -41,7 +43,7 @@ class SettingsScreen extends ConsumerWidget {
               },
             ),
             RadioListTile<ThemeMode>(
-              title: const Text('System Default'),
+              title: Text(AppLocalizations.of(context)!.systemDefault),
               value: ThemeMode.system,
               groupValue: themeMode,
               onChanged: (mode) {
@@ -49,12 +51,12 @@ class SettingsScreen extends ConsumerWidget {
               },
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Language Settings',
+            Text(
+              AppLocalizations.of(context)!.language,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             RadioListTile<Locale>(
-              title: const Text('English'),
+              title: Text(AppLocalizations.of(context)!.english),
               value: const Locale('en'),
               groupValue: selectedLanguage,
               onChanged: (locale) {
@@ -62,7 +64,7 @@ class SettingsScreen extends ConsumerWidget {
               },
             ),
             RadioListTile<Locale>(
-              title: const Text('Ukrainian'),
+              title: Text(AppLocalizations.of(context)!.ukrainian),
               value: const Locale('uk'),
               groupValue: selectedLanguage,
               onChanged: (locale) {
@@ -72,6 +74,7 @@ class SettingsScreen extends ConsumerWidget {
           ],
         ),
       ),
+      drawer: const CustomDrawer(),
     );
   }
 }
