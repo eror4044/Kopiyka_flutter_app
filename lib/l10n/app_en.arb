@@ -1,0 +1,10 @@
+{
+  "hello": "Hello",
+  "settings": "Settings",
+  "@hello": {
+    "description": "A greeting"
+  },
+  "@settings": {
+    "description": "Settings screen title"
+  }
+}
