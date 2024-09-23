@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kopiyka/generated/app_localizations.dart';
 import 'package:kopiyka/models/transaction_groped_data.dart';
 
 class DashboardBalance extends StatelessWidget {
@@ -30,9 +31,8 @@ class DashboardBalance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final balance = calculateBalance(transactions);
-
     return Text(
-      "Balance: $balance UAH",
+      AppLocalizations.of(context)!.balance + ": $balance UAH",
       style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     );
   }

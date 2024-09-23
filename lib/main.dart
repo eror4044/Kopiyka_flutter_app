@@ -1,22 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kopiyka/generated/app_localizations.dart';
+import 'package:kopiyka/providers/theme_provider.dart';
+import 'package:kopiyka/providers/language_provider.dart';
 import 'package:kopiyka/routes.dart';
+import 'package:kopiyka/theme/app_theme.dart';
 
 void main() {
-  runApp(ProviderScope(child: KopiykaApp()));
+  runApp(
+    ProviderScope(
+      child: KopiykaApp(),
+    ),
+  );
 }
 
-class KopiykaApp extends StatelessWidget {
-  KopiykaApp({Key? key}) : super(key: key);
-
+class KopiykaApp extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeProvider);
+    final locale = ref.watch(languageProvider);
     return MaterialApp.router(
-        title: 'Kopiyka',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: Colors.grey[200],
-        ),
-        routerConfig: router);
+      title: 'Kopiyka',
+      themeMode: themeMode,
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('uk', ''),
+      ],
+      darkTheme: AppTheme.darkTheme,
+      routerConfig: router,
+      locale: locale,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+    );
   }
 }

@@ -1,0 +1,71 @@
+{
+  "hello": "Привіт",
+  "settings": "Налаштування",
+  "theme": "Тема",
+  "lightTheme": "Світла тема",
+  "darkTheme": "Темна тема",
+  "systemDefault": "Системна за замовчуванням",
+  "language": "Мова",
+  "english": "Англійська",
+  "ukrainian": "Українська",
+  "dashboard": "Панель управління",
+  "balance": "Баланс",
+  "transactions": "Транзакції",
+  "reports": "Звіти",
+  "addTransaction": "Додати транзакцію",
+  "restoreData": "Відновити дані",
+  "save": "Зберегти",
+  "cancel": "Скасувати",
+  "menu": "Меню",
+  "@hello": {
+    "description": "Привітальне повідомлення"
+  },
+  "@settings": {
+    "description": "Назва екрану налаштувань"
+  },
+  "@theme": {
+    "description": "Назва налаштування теми"
+  },
+  "@lightTheme": {
+    "description": "Опція світлої теми"
+  },
+  "@darkTheme": {
+    "description": "Опція темної теми"
+  },
+  "@systemDefault": {
+    "description": "Опція системної теми за замовчуванням"
+  },
+  "@language": {
+    "description": "Назва налаштування мови"
+  },
+  "@english": {
+    "description": "Опція вибору англійської мови"
+  },
+  "@ukrainian": {
+    "description": "Опція вибору української мови"
+  },
+  "@dashboard": {
+    "description": "Назва екрану панелі управління"
+  },
+  "@balance": {
+    "description": "Назва секції з балансом"
+  },
+  "@transactions": {
+    "description": "Назва секції транзакцій"
+  },
+  "@reports": {
+    "description": "Назва екрану звітів"
+  },
+  "@addTransaction": {
+    "description": "Кнопка додавання транзакції"
+  },
+  "@restoreData": {
+    "description": "Кнопка відновлення даних"
+  },
+  "@save": {
+    "description": "Кнопка збереження"
+  },
+  "@cancel": {
+    "description": "Кнопка скасування"
+  }
+}

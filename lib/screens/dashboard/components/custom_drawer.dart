@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kopiyka/constants/routing_enum.dart';
+import 'package:kopiyka/app_routes.dart';
+import 'package:kopiyka/generated/app_localizations.dart'; // Импорт локализаций
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -10,38 +11,34 @@ class CustomDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
+          DrawerHeader(
+            decoration: const BoxDecoration(
               color: Colors.blue,
             ),
-            child: Text('Menu'),
+            child: Text(AppLocalizations.of(context)!.menu),
           ),
           ListTile(
-            title: const Text('Reports'),
+            title: Text(AppLocalizations.of(context)!.dashboard),
             onTap: () {
-              // Navigate to the ReportsScreen
-              context.go(RoutingEnum.reports.name);
+              context.go(AppRoutes.dashboard);
             },
           ),
           ListTile(
-            title: const Text('Settings'),
+            title: Text(AppLocalizations.of(context)!.reports),
             onTap: () {
-              // Navigate to the SettingsScreen
-              context.go(RoutingEnum.settings.name);
+              context.go(AppRoutes.reports);
             },
           ),
           ListTile(
-            title: const Text('Restore Data'),
+            title: Text(AppLocalizations.of(context)!.settings),
             onTap: () {
-              // Navigate to the RestoreDataScreen
-              context.go(RoutingEnum.restoreData.name);
+              context.go(AppRoutes.settings);
             },
           ),
           ListTile(
-            title: const Text('404 Test route'),
+            title: Text(AppLocalizations.of(context)!.restoreData),
             onTap: () {
-              // Navigate to the empty screen
-              context.go('/void');
+              context.go(AppRoutes.restoreData);
             },
           )
         ],

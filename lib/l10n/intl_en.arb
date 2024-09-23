@@ -1,0 +1,71 @@
+{
+  "hello": "Hello",
+  "settings": "Settings",
+  "theme": "Theme",
+  "lightTheme": "Light Theme",
+  "darkTheme": "Dark Theme",
+  "systemDefault": "System Default",
+  "language": "Language",
+  "english": "English",
+  "ukrainian": "Ukrainian",
+  "dashboard": "Dashboard",
+  "balance": "Balance",
+  "transactions": "Transactions",
+  "reports": "Reports",
+  "addTransaction": "Add Transaction",
+  "restoreData": "Restore Data",
+  "save": "Save",
+  "cancel": "Cancel",
+  "menu": "Menu",
+  "@hello": {
+    "description": "A greeting message"
+  },
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "@theme": {
+    "description": "Theme setting title"
+  },
+  "@lightTheme": {
+    "description": "Option for light theme"
+  },
+  "@darkTheme": {
+    "description": "Option for dark theme"
+  },
+  "@systemDefault": {
+    "description": "Option for system default theme"
+  },
+  "@language": {
+    "description": "Language setting title"
+  },
+  "@english": {
+    "description": "Option to select English language"
+  },
+  "@ukrainian": {
+    "description": "Option to select Ukrainian language"
+  },
+  "@dashboard": {
+    "description": "Dashboard screen title"
+  },
+  "@balance": {
+    "description": "Section showing balance"
+  },
+  "@transactions": {
+    "description": "Section showing transactions"
+  },
+  "@reports": {
+    "description": "Reports screen title"
+  },
+  "@addTransaction": {
+    "description": "Button to add a new transaction"
+  },
+  "@restoreData": {
+    "description": "Button to restore data"
+  },
+  "@save": {
+    "description": "Button to save data"
+  },
+  "@cancel": {
+    "description": "Button to cancel operation"
+  }
+}

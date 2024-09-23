@@ -1,0 +1,6 @@
+arb-dir: lib/l10n
+template-arb-file: intl_en.arb
+output-dir: lib/generated
+output-class: AppLocalizations
+preferred-supported-locales: [en, uk]
+synthetic-package: false

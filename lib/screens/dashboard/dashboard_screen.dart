@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kopiyka/constants/routing_enum.dart';
+import 'package:kopiyka/app_routes.dart';
 import 'package:kopiyka/providers/category_provider.dart';
 import 'package:kopiyka/providers/transaction_provider.dart';
 import 'package:kopiyka/screens/dashboard/components/balance.dart';
@@ -16,6 +16,7 @@ class DashboardScreen extends ConsumerStatefulWidget {
   _DashboardScreenState createState() => _DashboardScreenState();
 }
 
+//ToDo create logic for screen dashboard by periods from day to day
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
@@ -31,10 +32,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     return Scaffold(
       appBar: AppBar(actions: [
         IconButton(
-          icon: const Icon(Icons.settings_accessibility_outlined),
+          icon: const Icon(Icons.settings),
           onPressed: () {
             //open change theme screen
-            context.go(RoutingEnum.settings.name);
+            context.go(AppRoutes.settings);
           },
         ),
       ]),
