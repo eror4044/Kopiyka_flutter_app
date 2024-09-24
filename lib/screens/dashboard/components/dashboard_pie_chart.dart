@@ -19,35 +19,47 @@ class _DashboardPieChartState extends State<DashboardPieChart> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 500,
-      child: PieChart(
-        PieChartData(
-          sections: showingSections(widget.transactions),
-          centerSpaceRadius: 50,
-          sectionsSpace: 0,
-          pieTouchData: PieTouchData(
-            touchCallback: (FlTouchEvent event, pieTouchResponse) {
-              if (!event.isInterestedForInteractions ||
-                  pieTouchResponse == null ||
-                  pieTouchResponse.touchedSection == null) {
-                return;
-              }
-              setState(() {
-                touchedIndex =
-                    pieTouchResponse.touchedSection!.touchedSectionIndex;
-              });
-              showBottomSheetForSection(touchedIndex);
-            },
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = MediaQuery.of(context).size.width;
+        final screenHeight = MediaQuery.of(context).size.height;
+
+        final chartSize = screenWidth * 0.6;
+        final chartSpaceHeight = screenHeight * 0.63;
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50.0),
+          child: SizedBox(
+            height: chartSpaceHeight,
+            child: PieChart(
+              PieChartData(
+                sections: showingSections(widget.transactions),
+                centerSpaceRadius: chartSize / 4,
+                sectionsSpace: 0,
+                pieTouchData: PieTouchData(
+                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                    if (!event.isInterestedForInteractions ||
+                        pieTouchResponse == null ||
+                        pieTouchResponse.touchedSection == null) {
+                      return;
+                    }
+                    setState(() {
+                      touchedIndex =
+                          pieTouchResponse.touchedSection!.touchedSectionIndex;
+                    });
+                    showBottomSheetForSection(touchedIndex);
+                  },
+                ),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
   List<PieChartSectionData> showingSections(
       List<TransactionGroupedData> groupedData) {
-    // Filter groupedData to only include transactions where isIncome is false
     final filteredGroupedData = groupedData
         .map((group) {
           final filteredTransactions = group.transactions
@@ -61,7 +73,6 @@ class _DashboardPieChartState extends State<DashboardPieChart> {
         .where((group) => group.transactions.isNotEmpty)
         .toList();
 
-    // Generate PieChartSectionData only for the filtered transactions
     return filteredGroupedData.asMap().entries.map((entry) {
       int index = entry.key;
       TransactionGroupedData data = entry.value;
