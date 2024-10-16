@@ -21,7 +21,7 @@ class _DashboardPieChartState extends State<DashboardPieChart> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final screenWidth = MediaQuery.of(context).size.width;
+        final screenWidth = MediaQuery.sizeOf(context).width;
         final screenHeight = MediaQuery.of(context).size.height;
 
         final chartSize = screenWidth * 0.6;

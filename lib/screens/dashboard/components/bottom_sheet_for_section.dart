@@ -25,7 +25,7 @@ class BottomSheetForSection extends StatelessWidget {
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           Text(
-            'Загальна сумма: \$${selectedData.transactions.fold<double>(0, (sum, transaction) => sum + transaction.amount).toStringAsFixed(2)}',
+            'Загальна сумма: \$${selectedData.transactions.fold(0, (sum, transaction) => sum + transaction.amount).toStringAsFixed(2)}',
           ),
           const SizedBox(),
           ...selectedData.transactions.map<Widget>((transaction) {

@@ -8,7 +8,7 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final screenWidth = MediaQuery.of(context).size.width;
+        final screenWidth = MediaQuery.sizeOf(context).width;
         final iconSize = screenWidth * 0.35;
 
         return BottomAppBar(
@@ -29,7 +29,7 @@ class BottomBar extends StatelessWidget {
                 IconButton(
                   iconSize: iconSize,
                   icon: const Icon(Icons.remove_circle_outline,
-                      color: Colors.red),
+                      color: Colors.red,)
                   onPressed: () {
                     showAddTransactionModal(context, false);
                   },
