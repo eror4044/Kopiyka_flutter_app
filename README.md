@@ -1,5 +1,3 @@
-![A very simple and intuitive expense tracking app](https://github.com/user-attachments/assets/f0144233-6db5-4484-b450-836d0181a0fc)# Kopiyka
-
 A new Flutter project.
 
 ## Getting Started
