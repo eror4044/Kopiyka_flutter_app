@@ -52,4 +52,3 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 }
-//ToDo Fix issue with income transaction (it showing as expense) in chart and balance
