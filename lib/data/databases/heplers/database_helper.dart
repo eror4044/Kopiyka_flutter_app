@@ -54,7 +54,6 @@ class DatabaseHelper {
       )
     ''');
 
-    // insert mock data for development
     await _insertInitialCategories(db);
     await _insertInitialTransactions(db);
   }
@@ -137,164 +136,164 @@ class DatabaseHelper {
     List<Map<String, dynamic>> initialTransactions = [
       {
         'category': categoryIds['Food'],
-        'amount': 50.0,
+        'amount': 45.0,
         'account': 'Debit Card',
         'currency': 'USD',
         'description': 'Groceries',
-        'date': '2023-07-25',
+        'date': '2023-01-15',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Transport'],
-        'amount': 20.0,
+        'amount': 25.0,
         'account': 'Cash',
         'currency': 'USD',
         'description': 'Taxi ride',
-        'date': '2023-07-26',
+        'date': '2023-02-10',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Entertainment'],
-        'amount': 100.0,
+        'amount': 120.0,
         'account': 'Credit Card',
         'currency': 'USD',
         'description': 'Concert tickets',
-        'date': '2023-07-27',
+        'date': '2023-03-05',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Utilities'],
-        'amount': 150.0,
+        'amount': 160.0,
         'account': 'Bank Transfer',
         'currency': 'USD',
         'description': 'Electricity bill',
-        'date': '2023-07-28',
+        'date': '2023-04-20',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Food'],
-        'amount': 30.0,
+        'amount': 35.0,
         'account': 'Cash',
         'currency': 'USD',
         'description': 'Dinner at a restaurant',
-        'date': '2023-07-29',
+        'date': '2023-04-25',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Health'],
-        'amount': 200.0,
+        'amount': 150.0,
         'account': 'Debit Card',
         'currency': 'USD',
         'description': 'Medical check-up',
-        'date': '2023-07-30',
+        'date': '2023-05-14',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Education'],
-        'amount': 500.0,
+        'amount': 550.0,
         'account': 'Bank Transfer',
         'currency': 'USD',
         'description': 'Online course fee',
-        'date': '2023-08-01',
+        'date': '2023-06-01',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Shopping'],
-        'amount': 250.0,
+        'amount': 280.0,
         'account': 'Credit Card',
         'currency': 'USD',
         'description': 'Clothing and accessories',
-        'date': '2023-08-02',
+        'date': '2023-06-12',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Rent'],
-        'amount': 1200.0,
+        'amount': 1250.0,
         'account': 'Bank Transfer',
         'currency': 'USD',
         'description': 'Monthly rent payment',
-        'date': '2023-08-03',
+        'date': '2023-07-03',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Savings'],
-        'amount': 300.0,
+        'amount': 350.0,
         'account': 'Bank Transfer',
         'currency': 'USD',
         'description': 'Monthly savings deposit',
-        'date': '2023-08-04',
-        'isIncome': 0,
+        'date': '2023-07-05',
+        'isIncome': 1,
       },
       {
         'category': categoryIds['Entertainment'],
-        'amount': 60.0,
+        'amount': 50.0,
         'account': 'Cash',
         'currency': 'USD',
         'description': 'Movie night',
-        'date': '2023-08-05',
+        'date': '2023-08-10',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Utilities'],
-        'amount': 100.0,
+        'amount': 90.0,
         'account': 'Bank Transfer',
         'currency': 'USD',
         'description': 'Water bill',
-        'date': '2023-08-06',
+        'date': '2023-08-12',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Transport'],
-        'amount': 45.0,
+        'amount': 55.0,
         'account': 'Debit Card',
         'currency': 'USD',
         'description': 'Gasoline',
-        'date': '2023-08-07',
+        'date': '2023-09-07',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Food'],
-        'amount': 70.0,
+        'amount': 80.0,
         'account': 'Credit Card',
         'currency': 'USD',
         'description': 'Weekly groceries',
-        'date': '2023-08-08',
+        'date': '2023-09-15',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Health'],
-        'amount': 35.0,
+        'amount': 45.0,
         'account': 'Cash',
         'currency': 'USD',
         'description': 'Pharmacy expenses',
-        'date': '2023-08-09',
+        'date': '2023-10-09',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Shopping'],
-        'amount': 150.0,
+        'amount': 200.0,
         'account': 'Debit Card',
         'currency': 'USD',
         'description': 'Gadgets and electronics',
-        'date': '2023-08-10',
-        'isIncome': 0,
-      },
-      {
-        'category': categoryIds['Shopping'],
-        'amount': 150.0,
-        'account': 'Debit Card',
-        'currency': 'USD',
-        'description': 'Gadgets and electronics',
-        'date': '2023-08-10',
+        'date': '2023-11-10',
         'isIncome': 0,
       },
       {
         'category': categoryIds['Salary'],
-        'amount': 15000.0,
+        'amount': 3000.0,
         'account': 'Debit Card',
         'currency': 'USD',
-        'description': 'salary',
-        'date': '2023-08-10',
+        'description': 'Monthly salary',
+        'date': '2023-11-05',
+        'isIncome': 1,
+      },
+      {
+        'category': categoryIds['Savings'],
+        'amount': 500.0,
+        'account': 'Bank Transfer',
+        'currency': 'USD',
+        'description': 'End of year savings',
+        'date': '2023-12-20',
         'isIncome': 1,
       }
     ];
@@ -306,8 +305,40 @@ class DatabaseHelper {
 
   Future<int> insertTransaction(TransactionModel transaction) async {
     final db = await database;
-    final _transaction = transaction.toMap();
-    return await db.insert('transactions', _transaction);
+    final transactionMap = transaction.toMap();
+    return await db.insert('transactions', transactionMap);
+  }
+
+  Future<List<TransactionGroupedByCategoryData>>
+      getTransactionsWithCategories() async {
+    final List<Map<String, dynamic>> transactions = await getTransactions();
+    final Map<String, List<TransactionModel>> groupedByCategory = {};
+
+    for (var transaction in transactions) {
+      final category = CategoryModel(
+        id: transaction['cat_id'],
+        icon: transaction['cat_icon'],
+        title: transaction['cat_title'],
+        color: transaction['cat_color'],
+        type: CategoryType.fromValue(transaction['cat_type']),
+      );
+      final transactionModel = TransactionModel.fromMap(transaction, category);
+
+      // Group transactions by category name
+      groupedByCategory.update(
+        category.title,
+        (list) => list..add(transactionModel),
+        ifAbsent: () => [transactionModel],
+      );
+    }
+
+    // Convert Map<String, List<TransactionModel>> to List<TransactionGroupedData>
+    return groupedByCategory.entries.map((entry) {
+      return TransactionGroupedByCategoryData(
+        categoryName: entry.key,
+        transactions: entry.value,
+      );
+    }).toList();
   }
 
   Future<List<Map<String, dynamic>>> getTransactions() async {
@@ -318,39 +349,6 @@ class DatabaseHelper {
     FROM transactions
     INNER JOIN categories ON transactions.category = categories.id
   ''');
-  }
-
-  Future<List<TransactionGroupedData>> getTransactionsWithCategories() async {
-    final List<Map<String, dynamic>> transactions = await getTransactions();
-    final List<Map<String, dynamic>> categories = await getAllCategories();
-
-    final List<TransactionGroupedData> groupedData = [];
-    //add categories to groupedData
-    for (var category in categories) {
-      final categoryModel = CategoryModel.fromMap(category);
-      groupedData.add(TransactionGroupedData(
-        categoryName: categoryModel.title,
-        transactions: [],
-      ));
-    }
-    //add transactions to groupedData by category
-    for (var transaction in transactions) {
-      final category = CategoryModel(
-        id: transaction['cat_id'],
-        icon: transaction['cat_icon'],
-        title: transaction['cat_title'],
-        color: transaction['cat_color'],
-        type: CategoryType.fromValue(transaction['cat_type']),
-      );
-      final transactionModel = TransactionModel.fromMap(transaction, category);
-      for (var group in groupedData) {
-        if (group.categoryName == transactionModel.category.title) {
-          group.transactions.add(transactionModel);
-        }
-      }
-    }
-
-    return groupedData;
   }
 
   Future<List<Map<String, dynamic>>> getAllCategories() async {

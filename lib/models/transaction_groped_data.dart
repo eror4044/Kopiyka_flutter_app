@@ -1,33 +1,27 @@
 import 'package:kopiyka/models/transaction.dart';
 
-class TransactionGroupedData {
+class TransactionsByPeriod {
+  final Map<String, List<TransactionGroupedByCategoryData>>
+      transactionsByPeriod;
+
+  TransactionsByPeriod(this.transactionsByPeriod);
+
+  // Optional method to get all period keys (for easier access and iteration)
+  List<String> get periods => transactionsByPeriod.keys.toList();
+
+  // Optional method to get transactions by a specific period
+  List<TransactionGroupedByCategoryData>? getTransactionsForPeriod(
+      String period) {
+    return transactionsByPeriod[period];
+  }
+}
+
+class TransactionGroupedByCategoryData {
   final String categoryName;
   final List<TransactionModel> transactions;
 
-  TransactionGroupedData({
+  TransactionGroupedByCategoryData({
     required this.categoryName,
     required this.transactions,
   });
-}
-
-List<TransactionGroupedData> groupTransactionsByCategory(
-    List<TransactionModel> transactions) {
-  final Map<String, List<TransactionModel>> groupedData = {};
-
-  for (var transaction in transactions) {
-    final categoryName = transaction.category.title;
-
-    groupedData.update(
-      categoryName,
-      (list) => list..add(transaction),
-      ifAbsent: () => [transaction],
-    );
-  }
-
-  return groupedData.entries.map((entry) {
-    return TransactionGroupedData(
-      categoryName: entry.key,
-      transactions: entry.value,
-    );
-  }).toList();
 }
