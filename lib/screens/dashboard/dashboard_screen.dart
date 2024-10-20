@@ -16,7 +16,6 @@ class DashboardScreen extends ConsumerStatefulWidget {
   _DashboardScreenState createState() => _DashboardScreenState();
 }
 
-//ToDo create logic for screen dashboard by periods from day to day
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
@@ -27,25 +26,53 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final transactions = ref.watch(transactionProvider);
+    final transactionsByPeriod = ref.watch(transactionProvider);
+
+    // Check if the state has periods available
+    if (transactionsByPeriod.transactionsByPeriod.isEmpty) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
 
     return Scaffold(
-      appBar: AppBar(actions: [
-        IconButton(
-          icon: const Icon(Icons.settings),
-          onPressed: () {
-            //open change theme screen
-            context.go(AppRoutes.settings);
-          },
-        ),
-      ]),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            DashboardPieChart(transactions: transactions),
-            DashboardBalance(transactions: transactions),
-          ],
-        ),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              context.go(AppRoutes.settings);
+            },
+          ),
+        ],
+      ),
+      body: PageView.builder(
+        itemCount: transactionsByPeriod.periods.length,
+        itemBuilder: (context, index) {
+          final period = transactionsByPeriod.periods[index];
+          final transactionsForPeriod =
+              transactionsByPeriod.getTransactionsForPeriod(period);
+
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                if (transactionsForPeriod != null) ...[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      period,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  DashboardPieChart(
+                    transactionsByCategory: transactionsForPeriod,
+                  )
+                ],
+              ],
+            ),
+          );
+        },
       ),
       bottomNavigationBar: const BottomBar(),
       drawer: const CustomDrawer(),
