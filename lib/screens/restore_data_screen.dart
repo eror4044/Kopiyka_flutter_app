@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'dart:convert';
+import 'dart:io';
 import 'package:kopiyka/screens/dashboard/components/custom_drawer.dart';
 
 class RestoreDataScreen extends StatefulWidget {
@@ -12,12 +15,41 @@ class _RestoreDataScreenState extends State<RestoreDataScreen> {
   String _fileName = 'No file selected';
   List<Map<String, dynamic>> _transactions = [];
 
-  Future<void> _pickFile() async {}
+  Future<void> _pickFile() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['bac'],
+      );
+
+      if (result != null && result.files.single.path != null) {
+        String filePath = result.files.single.path!;
+        File file = File(filePath);
+
+        String fileContent = await file.readAsString();
+        List<dynamic> jsonData = jsonDecode(fileContent);
+
+        setState(() {
+          _fileName = result.files.single.name;
+          _transactions = List<Map<String, dynamic>>.from(jsonData);
+        });
+      } else {
+        setState(() {
+          _fileName = 'No file selected';
+          _transactions = [];
+        });
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error picking file: $e')),
+      );
+    }
+  }
 
   void _restoreData() {
-    // Show a message to the user
     ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Data restored successfully')));
+      const SnackBar(content: Text('Data restored successfully')),
+    );
   }
 
   @override
