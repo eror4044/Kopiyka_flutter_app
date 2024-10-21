@@ -1,10 +1,11 @@
 import 'package:kopiyka/models/category.dart';
 import 'package:kopiyka/models/transaction.dart';
 import 'package:kopiyka/models/transaction_groped_data.dart';
+import 'package:kopiyka/services/transaction_service.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class DatabaseHelper {
+class DatabaseHelper implements TransactionService {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
   factory DatabaseHelper() => _instance;
 
