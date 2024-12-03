@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:kopiyka/app_routes.dart';
 import 'package:kopiyka/providers/category_provider.dart';
 import 'package:kopiyka/providers/transaction_provider.dart';
-import 'package:kopiyka/screens/dashboard/components/balance.dart';
 import 'package:kopiyka/screens/dashboard/components/bottom_bar.dart';
 import 'package:kopiyka/screens/dashboard/components/custom_drawer.dart';
 import 'package:kopiyka/screens/dashboard/components/dashboard_pie_chart.dart';
